@@ -9,12 +9,12 @@ class MyFrame extends JFrame
 	JTextField t1;
 	JTextField t2;
 	public MyFrame() {
-		setTitle("마일을 킬로미터로 변환");
+		setTitle("Mile->Km");
 		setSize(300, 150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel1 =new JPanel();
-		JLabel label = new JLabel("거리를 마일 단위로 입력하시오");
+		JLabel label = new JLabel("마일을 입력하시오");
 		t1 = new JTextField(7);
 		t2 = new JTextField(25);
 		button = new JButton("변환");
@@ -38,7 +38,7 @@ class MyFrame extends JFrame
 			{
 				int t = Integer.parseInt(t1.getText());
 				double k = t*1.609344;
-				t2.setText(t + "마일은 " +k+ "킬로미터입니다.");
+				t2.setText(t + "마일은 " +k+ "km입니다.");
 			}
 		}
 	}
