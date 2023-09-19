@@ -1,64 +1,65 @@
-/*
 package practice;
 
-import java.awt.BorderLayout;
-import java.awt.event.*;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MoveCar extends JFrame {
-	int img_x=150, img_y=150;
-	JButton button;
-	JButton b1, b2;
-	
-	public MoveCar() {
-		setSize(500,300);
-		button = new JButton("");
-		ImageIcon icon = new ImageIcon("C:/Users/kdaeu/OneDrive/바탕 화면/자동차.jpg");
-		button.setIcon(icon);
-		
-		b1 = new JButton("LEFT");
-		b2 = new JButton("RIGHT");
-		
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		button.setLocation(img_x, img_y);
-		button.setSize(200,100);
-		panel.add(b1);
-		panel.add(b2);
-		
-		add(panel, BorderLayout.CENTER);
-		b1.addActionListener(new MyListener());
-		b2.addActionListener(new MyListener());
-		panel.add(button);
-		panel.requestFocus();
-		
-		panel.setFocusable(true);
-		
-		panel.addKeyListener(new KeyListener(){
-			public void keyPressed(KeyEvent e) {
-				int keycode = e.getKeyCode();
-				switch (keycode) {
-				case KeyEvent.VK_LEFT: img_x-=20; break;
-				case KeyEvent.VK_RIGHT: img_x+=20; break;
-				}
-				button.setLocation(img_x, img_y);
-			}
-			public void keyReleased(KeyEvent arg0) {}
-			public void keyTyped(KeyEvent arg0) {}
-		});
-		
-		add(panel);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	public static void main(String[] args) {
-		MoveCar f = new MoveCar();
-	}
+    int img_x = 200, img_y = 100;
+    JButton button;
+    JButton leftButton, rightButton;
 
+    public MoveCar() {
+        setSize(800, 600);
+
+        ImageIcon originalIcon = new ImageIcon("C:/Users/kdaeu/OneDrive/바탕 화면/자동차.jpg");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(400, 200, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+        button = new JButton("");
+        button.setIcon(scaledIcon);
+
+        leftButton = new JButton("LEFT");
+        rightButton = new JButton("RIGHT");
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(leftButton);
+        buttonPanel.add(rightButton);
+        panel.add(buttonPanel, BorderLayout.NORTH);
+
+        button.setBounds(img_x, img_y, 200, 100);
+        panel.add(button, BorderLayout.CENTER);
+
+        leftButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                img_x -= 20;
+                button.setLocation(img_x, img_y);
+            }
+        });
+
+        rightButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                img_x += 20;
+                button.setLocation(img_x, img_y);
+            }
+        });
+
+        add(panel);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new MoveCar();
+            }
+        });
+    }
 }
-*/
+
