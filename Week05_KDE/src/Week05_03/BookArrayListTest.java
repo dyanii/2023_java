@@ -11,7 +11,7 @@ public class BookArrayListTest {
 		Book book2 = new Book(0002, "황무지");
 		Book book3 = new Book(0003, "변신");
 		Book book4 = new Book(0004, "픽션들");
-		Book book5 = new Book(0005, "토이스토리");
+		Book book5 = new Book(0005, "톨스토이");
 		
 		bookArrayList.addBook(book1);
 		bookArrayList.addBook(book2);
