@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class UserInform {
@@ -14,6 +16,8 @@ public class UserInform {
 		Scanner scan = null;
 		PrintWriter in = new PrintWriter(new FileWriter("user.txt"));
 		Scanner s = new Scanner(System.in);
+		Map<String, String> userMap = new HashMap<>();
+		
 		while(true) {
 			System.out.println("번호: ");
 			num = s.next();
@@ -31,12 +35,16 @@ public class UserInform {
 				break;
 		}
 		
-		Scanner sc = new Scanner(new File("user.txt"));
-		System.out.print("검색할 번호를 입력하시오: ");
-		search = s.next();
+		in.close();
 		
-		while(sc.equals(num)) {
-			System.out.println();
+		System.out.println("전화번호를 조회할 번호를 입력하세요: ");
+		String searchNum = s.next();
+		String phoneNum = userMap.get(tel);
+		
+		if(searchNum != null) {
+			System.out.println("해당 번호의 전화번호: " + tel);
+		}else {
+			System.out.println("전화번호를 찾을 수 없습니다.");
 		}
 	}
 }

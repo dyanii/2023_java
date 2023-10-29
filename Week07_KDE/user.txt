@@ -1,1 +1,1 @@
-1, 홍길동, 01011111111, hong@hong.x2, 김유신, 01022222222, kim@kim.x
+1, kim, 1111, kim.kr2, park, 2222, park.kr
