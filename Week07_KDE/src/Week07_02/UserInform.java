@@ -1,6 +1,8 @@
 package Week07_02;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,14 +39,33 @@ public class UserInform {
 		
 		in.close();
 		
-		System.out.println("전화번호를 조회할 번호를 입력하세요: ");
-		String searchNum = s.next();
-		String phoneNum = userMap.get(tel);
-		
-		if(searchNum != null) {
-			System.out.println("해당 번호의 전화번호: " + tel);
-		}else {
-			System.out.println("전화번호를 찾을 수 없습니다.");
+		System.out.println("검색하실 사용자 번호를 입력하세요: ");
+		num2 = s.nextInt();
+		search = num2 + "";
+		scan = new Scanner(new BufferedReader(new FileReader("user.txt")));
+		scan.useDelimiter("\n");
+		boolean found = false;
+		PrintWriter findUserWriter = new PrintWriter(new FileWriter("find_user.txt"));
+		while(scan.hasNext()) {
+			String userInfo = scan.next();
+			String[] userInfoParts = userInfo.split(",");
+			num = userInfoParts[0];
+			name = userInfoParts[1];
+			tel = userInfoParts[2];
+			email = userInfoParts[3];
+			if(num.equals(search)) {
+				found = true;
+				findUserWriter.print(num + "," + name + 
+						"," + tel + "," + email + "\n");
+				break;
+			}
 		}
+		if(!found) {
+			System.out.println("사용자 번호 " + num2 + "을 찾을 수 없습니다.");
+		}
+		findUserWriter.close();
+		
+		if(scan != null)
+			scan.close();
 	}
 }
