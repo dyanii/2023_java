@@ -6,4 +6,5 @@
  *
  */
 module Week05_KDE {
+	requires java.xml;
 }
