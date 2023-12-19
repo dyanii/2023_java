@@ -1,13 +1,8 @@
 package Practice;
-//오류뜸!!! 다시 해보기.
+//영어 스펠체크 프로그램 -클라이언트
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 import java.util.Scanner;
 
 public class SpellCheckerClient {
@@ -20,25 +15,25 @@ public class SpellCheckerClient {
 	public void run() {
 		System.out.println("스펠체크 클라이언트입니다.");
 		setupConnection();
-		System.out.println("스펠페크 서버에 접속하였습니다.");
+		System.out.println("스펠체크 서버에 접속하였습니다.");		
 		
 		Scanner scanner = new Scanner(System.in);
 		String word;
 		while(true) {
 			try {
 				System.out.print("단어 >> ");
-				word = scanner.next();
+				word = scanner.next(); // 단어 읽기		
 				if(word.equals("quit")) {
 					System.out.println("프로그램을 종료합니다...");
 					break;
 				}
 				out.write(word + "\n");
 				out.flush();
-				
+					
 				String result = in.readLine();
 				System.out.println(result);
-			}catch(IOException e1) {
-				System.out.println("서버로부터 연결이 종료되었습니다.");
+			} catch (IOException e1) {
+				System.out.println("서버로부터 연결이 종료되었습니다...");
 				break;
 			}
 		}
@@ -50,9 +45,9 @@ public class SpellCheckerClient {
 			socket = new Socket("localhost", 5000);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		}catch(UnknownHostException e) {
+		} catch (UnknownHostException e) {
 			e.printStackTrace();
-		}catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -61,4 +56,5 @@ public class SpellCheckerClient {
 		SpellCheckerClient checkerClient = new SpellCheckerClient();
 		checkerClient.run();
 	}
+
 }

@@ -1,6 +1,8 @@
 package num3;
 
 import java.util.ArrayList;
+
+
 import java.util.Scanner;
 
 public class Main extends Student{

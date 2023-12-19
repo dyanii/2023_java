@@ -1,5 +1,5 @@
 package Practice;
-
+//간단한 스레드 만들기
 import java.awt.Color;
 
 import javax.swing.JFrame;
