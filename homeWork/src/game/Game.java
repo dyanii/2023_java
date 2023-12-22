@@ -83,8 +83,8 @@ class DDD extends GraphicObject{
 class Kirby extends GraphicObject{
 	public Kirby(String name) {
 		super(name);
-		x = 150;
-		y = 350;
+		x = 300;
+		y = 250;
 	}
 	
 	public void keyPressed(KeyEvent event) {
@@ -198,7 +198,7 @@ public class Game extends JFrame{
 	public Game() {
 		setTitle("별의 커비 시리즈 - 디디디대왕을 찾아서");
 		add(new MyPanel());
-		setSize(700, 500);
+		setSize(600, 400);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
