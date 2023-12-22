@@ -1,5 +1,6 @@
 package game;
 
+//별의 커비 시리즈 - 디디디대왕을 찾아서
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -63,7 +64,7 @@ class Star extends GraphicObject{
 }
 
 class DDD extends GraphicObject{
-	int dx = -10;
+	int dx = -10;//움직이는 속도
 	
 	public DDD(String name) {
 		super(name);
@@ -129,6 +130,7 @@ class MyPanel extends JPanel implements KeyListener{
 					for(Star star : stars) {
 						star.update();
 						
+						//충돌확인1
 						Rectangle dddBounds = new Rectangle(ddd.x, ddd.y, ddd.img.getWidth(), ddd.img.getHeight());
 						Rectangle starBounds = new Rectangle(star.x, star.y, star.img.getWidth(), star.img.getHeight());
 						
@@ -137,6 +139,7 @@ class MyPanel extends JPanel implements KeyListener{
 							stopGame();
 						}
 						
+						//충돌확인2
 						Rectangle kirbyBounds = new Rectangle(kirby.x, kirby.y, kirby.img.getWidth(), kirby.img.getHeight());
 						Rectangle dddBounds1 = new Rectangle(ddd.x, ddd.y, ddd.img.getWidth(), ddd.img.getHeight());
 						
@@ -161,10 +164,12 @@ class MyPanel extends JPanel implements KeyListener{
 		isRunning = false;
 	}
 	
+	//게임 공략 성공
 	private void showGameOverDialog() {
 		JOptionPane.showMessageDialog(this, "디디디대왕을 물리쳤습니다!", "게임 종료", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	//게임 공략 실패
 	private void showGameOverDialog1() {
 		JOptionPane.showMessageDialog(this, "게임 오버!!!", "게임 공략 실패", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -181,7 +186,7 @@ class MyPanel extends JPanel implements KeyListener{
 	
 	public void keyPressed(KeyEvent event) {
 		kirby.keyPressed(event);
-		for(Star star : stars) {
+		for(Star star : stars) { //별 여러개 나가게끔 설정..(실패)
 			star.keyPressed(event, kirby.x, kirby.y);
 		}
 		
