@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 class GraphicObject{
@@ -106,9 +108,11 @@ class MyPanel extends JPanel implements KeyListener{
 	Kirby kirby;
 	ArrayList<Star> stars;
 	
+	private volatile boolean isRunning = true;
 	
 	public MyPanel() {
 		super();
+		setBackground(Color.PINK);
 		this.addKeyListener(this);
 		this.requestFocus();
 		setFocusable(true);
@@ -119,7 +123,7 @@ class MyPanel extends JPanel implements KeyListener{
 		stars.add(new Star("star.png"));
 		class MyThread extends Thread{
 			public void run() {
-				while(true) {
+				while(isRunning) {
 					ddd.update();
 					kirby.update();
 					for(Star star : stars) {
@@ -129,7 +133,16 @@ class MyPanel extends JPanel implements KeyListener{
 						Rectangle starBounds = new Rectangle(star.x, star.y, star.img.getWidth(), star.img.getHeight());
 						
 						if(dddBounds.intersects(starBounds)) {
-							System.out.println("디디디대왕을 물리쳤습니다!");
+							showGameOverDialog();
+							stopGame();
+						}
+						
+						Rectangle kirbyBounds = new Rectangle(kirby.x, kirby.y, kirby.img.getWidth(), kirby.img.getHeight());
+						Rectangle dddBounds1 = new Rectangle(ddd.x, ddd.y, ddd.img.getWidth(), ddd.img.getHeight());
+						
+						if(kirbyBounds.intersects(dddBounds1)) {
+							showGameOverDialog1();
+							stopGame();
 						}
 					}
 					repaint();
@@ -142,6 +155,18 @@ class MyPanel extends JPanel implements KeyListener{
 		}
 		Thread t = new MyThread();
 		t.start();
+	}
+	
+	private void stopGame() {
+		isRunning = false;
+	}
+	
+	private void showGameOverDialog() {
+		JOptionPane.showMessageDialog(this, "디디디대왕을 물리쳤습니다!", "게임 종료", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private void showGameOverDialog1() {
+		JOptionPane.showMessageDialog(this, "게임 오버!!!", "게임 공략 실패", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void paint(Graphics g) {
@@ -171,7 +196,7 @@ class MyPanel extends JPanel implements KeyListener{
 
 public class Game extends JFrame{
 	public Game() {
-		setTitle("My Game");
+		setTitle("별의 커비 시리즈 - 디디디대왕을 찾아서");
 		add(new MyPanel());
 		setSize(700, 500);
 		setVisible(true);
